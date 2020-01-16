@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>File exchanger</title>
+    <meta charset="utf-8" />
+</head>
+
+<body>
+    <div>
+        <div>
+            <button id="uploadButton">Upload</button> files here
+        </div>
+        <div>
+            <input type="hidden" id="currentPath" value="<%= currentPath %>" />
+            <input type="file" id="filesToUpload" multiple />
+        </div>
+    </div>
+    <hr />
+    <div>
+        <button id="downloadSelectButton">Download</button> selected files or directories.
+    </div>
+    <hr />
+    <table>
+        <thead>
+            <tr>
+                <th>Select</th>
+                <th>Name</th>
+                <th>Size</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><button id="selectAllButton">Select all</button></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <% for (const element of elements) { %>
+            <tr>
+                <td><input type="checkbox" /></td>
+                <% if (element.isFile) { %>
+                <td><%= element.name %></td>
+                <% } else { %>
+                <td><a href="?path=<%= element.path %>"><%= element.name %></a></td>
+                <% } %>
+                <td><%= element.size %></td>
+                <td><button class="downloadButton" data-path="/download?path=<%= element.path %>">Download</button></td>
+            </tr>
+            <% } %>
+        </tbody>
+    </table>
+    <script type=" text/javascript" src="/js/select-all.js"></script>
+    <script type="text/javascript" src="/js/download.js"></script>
+    <script type="text/javascript" src="/js/upload.js"></script>
+</body>
+
+</html>
